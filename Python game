@@ -1,0 +1,1132 @@
+Importing Pygame Function
+import pygame
+1
+import pygame
+In the code above, which is pygame library is an open-source module for the Python programming language specifically intended to help you make games and other multimedia applications. Pygame can run across many platforms and operating systems.(Aircraft War Game in Python)
+
+Importing Random Function
+import random
+1
+import random
+In the code above. which is for the random() function, which generates random numbers between 0 and 1.(Aircraft War Game in Python)
+
+Function for Game Music
+BULLETSHOT_SOUNDTEST = pygame.mixer.Sound('image/sound/bullet.wav')
+OPPONENT1_DOWN_SOUNDTEST = pygame.mixer.Sound('image/sound/opponent1_down.wav')
+GAMEOVER_SOUNDTEST = pygame.mixer.Sound('image/sound/game_over.wav')
+BULLETSHOT_SOUNDTEST.set_volume(0.3)
+OPPONENT1_DOWN_SOUNDTEST.set_volume(0.3)
+GAMEOVER_SOUNDTEST.set_volume(0.3)
+pygame.mixer.music.load('image/sound/game_music.wav')
+pygame.mixer.music.play(-1, 0.0)
+pygame.mixer.music.set_volume(0.25)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+BULLETSHOT_SOUNDTEST = pygame.mixer.Sound('image/sound/bullet.wav')
+OPPONENT1_DOWN_SOUNDTEST = pygame.mixer.Sound('image/sound/opponent1_down.wav')
+GAMEOVER_SOUNDTEST = pygame.mixer.Sound('image/sound/game_over.wav')
+BULLETSHOT_SOUNDTEST.set_volume(0.3)
+OPPONENT1_DOWN_SOUNDTEST.set_volume(0.3)
+GAMEOVER_SOUNDTEST.set_volume(0.3)
+pygame.mixer.music.load('image/sound/game_music.wav')
+pygame.mixer.music.play(-1, 0.0)
+pygame.mixer.music.set_volume(0.25)
+In the code above, which is for the game music of bullet sound, the enemy down sound and the game over sound.(Aircraft War Game in Python)
+
+Function for Background Image
+GAME_BACKGROUND = pygame.image.load('image/image/background.png').convert()
+GAME_OVER = pygame.image.load('image/image/gameover.png')
+filename = 'image/image/aircraft_shooter.png'
+AIRCRAFT_IMAGES = pygame.image.load(filename)
+1
+2
+3
+4
+GAME_BACKGROUND = pygame.image.load('image/image/background.png').convert()
+GAME_OVER = pygame.image.load('image/image/gameover.png')
+filename = 'image/image/aircraft_shooter.png'
+AIRCRAFT_IMAGES = pygame.image.load(filename)
+In the code above, which is for the game background image and game over image.(Aircraft War Game in Python)
+
+Function for Player Parameters
+AIRCRAFT_PLAYER = []
+AIRCRAFT_PLAYER.append(pygame.Rect(0, 99, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 360, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 234, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 624, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 498, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(432, 624, 102, 126))
+AIRCRAFT_PLAYER_POSITION = [200, 600]
+OPPONENT = Opponent(AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, AIRCRAFT_PLAYER_POSITION)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+AIRCRAFT_PLAYER = []
+AIRCRAFT_PLAYER.append(pygame.Rect(0, 99, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 360, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 234, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 624, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 498, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(432, 624, 102, 126))
+AIRCRAFT_PLAYER_POSITION = [200, 600]
+OPPONENT = Opponent(AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, AIRCRAFT_PLAYER_POSITION)
+In the code above, which is for the player related parameters and it defines the surface related parameters used by the bullet object.(Aircraft War Game in Python)
+
+Function for Enemy or Opponent Parameters
+OPPONENT1 = pygame.Rect(534, 612, 57, 43)
+OPPONENT1_IMAGES = AIRCRAFT_IMAGES.subsurface(OPPONENT1)
+OPPONENT1_DOWN_IMAGES = []
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 347, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(873, 697, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 296, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(930, 697, 57, 43)))
+
+CHALLENGER1 = pygame.sprite.Group()
+1
+2
+3
+4
+5
+6
+7
+8
+9
+OPPONENT1 = pygame.Rect(534, 612, 57, 43)
+OPPONENT1_IMAGES = AIRCRAFT_IMAGES.subsurface(OPPONENT1)
+OPPONENT1_DOWN_IMAGES = []
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 347, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(873, 697, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 296, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(930, 697, 57, 43)))
+ 
+CHALLENGER1 = pygame.sprite.Group()
+In the code above, which is for the Enemy or opponent related parameters and it defines the surface related parameters used by the enemy object.
+
+Function for a Clock
+CLOCK.tick(60)
+1
+CLOCK.tick(60)
+In the code above, which is for the clock Control the maximum frame rate of the game is 60.(Aircraft War Game in Python)
+
+Function for Controlling Bullets
+if not OPPONENT.is_hit:
+if SHOOT_DISTANCE % 15 == 0:
+BULLETSHOT_SOUNDTEST.play()
+OPPONENT.shoot(BULLET_IMAGES)
+SHOOT_DISTANCE += 1
+if SHOOT_DISTANCE &gt;= 15:
+SHOOT_DISTANCE = 0
+
+if SHOOT_DISTANCE % 50 == 0:
+CHALLENGER1_POSITION = [random.randint(0, SCREEN_WIDTH - OPPONENT1.width), 0]
+CHALLENGERS1 = Challenger(OPPONENT1_IMAGES, OPPONENT1_DOWN_IMAGES, CHALLENGER1_POSITION)
+CHALLENGER1.add(CHALLENGERS1)
+CHALLENGER_DISTANCE += 1
+if CHALLENGER_DISTANCE &gt;= 100:
+CHALLENGER_DISTANCE = 0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+if not OPPONENT.is_hit:
+if SHOOT_DISTANCE % 15 == 0:
+BULLETSHOT_SOUNDTEST.play()
+OPPONENT.shoot(BULLET_IMAGES)
+SHOOT_DISTANCE += 1
+if SHOOT_DISTANCE &gt;= 15:
+SHOOT_DISTANCE = 0
+ 
+if SHOOT_DISTANCE % 50 == 0:
+CHALLENGER1_POSITION = [random.randint(0, SCREEN_WIDTH - OPPONENT1.width), 0]
+CHALLENGERS1 = Challenger(OPPONENT1_IMAGES, OPPONENT1_DOWN_IMAGES, CHALLENGER1_POSITION)
+CHALLENGER1.add(CHALLENGERS1)
+CHALLENGER_DISTANCE += 1
+if CHALLENGER_DISTANCE &gt;= 100:
+CHALLENGER_DISTANCE = 0
+In the code above, which is for Control the firing of the bullet distance and fire the bullet and to generate the enemy aircraft.(Aircraft War Game in Python)
+
+Function for the Delete Bullets
+for bullet in OPPONENT.bullets:
+bullet.move()
+if bullet.rect.bottom &lt; 0:
+OPPONENT.bullets.remove(bullet)
+1
+2
+3
+4
+for bullet in OPPONENT.bullets:
+bullet.move()
+if bullet.rect.bottom &lt; 0:
+OPPONENT.bullets.remove(bullet)
+In the code above, which is for the move and delete if it is exceed in the window.(Aircraft War Game in Python)
+Function for Player is Hit
+if pygame.sprite.collide_circle(CHALLENGER, OPPONENT):
+CHALLENGER_DOWN.add(CHALLENGER)
+CHALLENGER1.remove(CHALLENGER)
+OPPONENT.is_hit = True
+GAMEOVER_SOUNDTEST.play()
+break
+if CHALLENGER.rect.top &gt; SCREEN_HEIGHT:
+CHALLENGER1.remove(CHALLENGER)
+1
+2
+3
+4
+5
+6
+7
+8
+if pygame.sprite.collide_circle(CHALLENGER, OPPONENT):
+CHALLENGER_DOWN.add(CHALLENGER)
+CHALLENGER1.remove(CHALLENGER)
+OPPONENT.is_hit = True
+GAMEOVER_SOUNDTEST.play()
+break
+if CHALLENGER.rect.top &gt; SCREEN_HEIGHT:
+CHALLENGER1.remove(CHALLENGER)
+In the code above, which is to determine if the player is hit.(Aircraft War Game in Python)
+Function for Drawing Background
+screen.fill(0)
+screen.blit(GAME_BACKGROUND, (0, 0))
+
+# Drawing player plane
+if not OPPONENT.is_hit:
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+# Change the image index to make the aircraft animated
+OPPONENT.img_index = SHOOT_DISTANCE // 8
+else:
+OPPONENT.img_index = OPPONENT_DOWN_INDEX // 8
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+OPPONENT_DOWN_INDEX += 1
+if OPPONENT_DOWN_INDEX &gt; 47:
+RUNNING = False
+
+# Draw an wreck animation
+for CHALLENGERS_DOWN in CHALLENGER_DOWN:
+if CHALLENGERS_DOWN.down_index == 0:
+OPPONENT1_DOWN_SOUNDTEST.play()
+if CHALLENGERS_DOWN.down_index &gt; 7:
+CHALLENGER_DOWN.remove(CHALLENGERS_DOWN)
+SCORE += 1000
+continue
+screen.blit(CHALLENGERS_DOWN.down_imgs[CHALLENGERS_DOWN.down_index // 2], CHALLENGERS_DOWN.rect)
+CHALLENGERS_DOWN.down_index += 1
+
+# Drawing bullets and opponents planes
+OPPONENT.bullets.draw(screen)
+CHALLENGER1.draw(screen)
+
+# Draw a score
+SCORE_FONT = pygame.font.Font(None, 36)
+SCORE_TXT = SCORE_FONT.render(str(SCORE), True, (255, 255, 0))
+TXT_AIRCRAFT = SCORE_TXT.get_rect()
+TXT_AIRCRAFT.topleft = [10, 10]
+screen.blit(SCORE_TXT, TXT_AIRCRAFT)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+screen.fill(0)
+screen.blit(GAME_BACKGROUND, (0, 0))
+ 
+# Drawing player plane
+if not OPPONENT.is_hit:
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+# Change the image index to make the aircraft animated
+OPPONENT.img_index = SHOOT_DISTANCE // 8
+else:
+OPPONENT.img_index = OPPONENT_DOWN_INDEX // 8
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+OPPONENT_DOWN_INDEX += 1
+if OPPONENT_DOWN_INDEX &gt; 47:
+RUNNING = False
+ 
+# Draw an wreck animation
+for CHALLENGERS_DOWN in CHALLENGER_DOWN:
+if CHALLENGERS_DOWN.down_index == 0:
+OPPONENT1_DOWN_SOUNDTEST.play()
+if CHALLENGERS_DOWN.down_index &gt; 7:
+CHALLENGER_DOWN.remove(CHALLENGERS_DOWN)
+SCORE += 1000
+continue
+screen.blit(CHALLENGERS_DOWN.down_imgs[CHALLENGERS_DOWN.down_index // 2], CHALLENGERS_DOWN.rect)
+CHALLENGERS_DOWN.down_index += 1
+ 
+# Drawing bullets and opponents planes
+OPPONENT.bullets.draw(screen)
+CHALLENGER1.draw(screen)
+ 
+# Draw a score
+SCORE_FONT = pygame.font.Font(None, 36)
+SCORE_TXT = SCORE_FONT.render(str(SCORE), True, (255, 255, 0))
+TXT_AIRCRAFT = SCORE_TXT.get_rect()
+TXT_AIRCRAFT.topleft = [10, 10]
+screen.blit(SCORE_TXT, TXT_AIRCRAFT)
+In the code above, which is for the drawing background, drawing a player plane, drawing for wrick animation, drawing for bullets and enemy planes and drawing for a score.(Aircraft War Game in Python)
+
+Function for the Shortcut of Keyboard
+KEY_PRESSED_ENTER = pygame.key.get_pressed()
+# Invalid if the player is hit
+if not OPPONENT.is_hit:
+if KEY_PRESSED_ENTER[K_r] or KEY_PRESSED_ENTER[K_UP]:
+OPPONENT.moveUp()
+if KEY_PRESSED_ENTER[K_f] or KEY_PRESSED_ENTER[K_DOWN]:
+OPPONENT.moveDown()
+if KEY_PRESSED_ENTER[K_d] or KEY_PRESSED_ENTER[K_LEFT]:
+OPPONENT.moveLeft()
+if KEY_PRESSED_ENTER[K_g] or KEY_PRESSED_ENTER[K_RIGHT]:
+OPPONENT.moveRight()
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+KEY_PRESSED_ENTER = pygame.key.get_pressed()
+# Invalid if the player is hit
+if not OPPONENT.is_hit:
+if KEY_PRESSED_ENTER[K_r] or KEY_PRESSED_ENTER[K_UP]:
+OPPONENT.moveUp()
+if KEY_PRESSED_ENTER[K_f] or KEY_PRESSED_ENTER[K_DOWN]:
+OPPONENT.moveDown()
+if KEY_PRESSED_ENTER[K_d] or KEY_PRESSED_ENTER[K_LEFT]:
+OPPONENT.moveLeft()
+if KEY_PRESSED_ENTER[K_g] or KEY_PRESSED_ENTER[K_RIGHT]:
+OPPONENT.moveRight()
+In the code above, which is for the shortcut of keyboards.(Aircraft War Game in Python)
+Function for the Class use in a System
+class Bullet(pygame.sprite.Sprite):
+def __init__(self, BULLET_IMAGES, initial_position):
+pygame.sprite.Sprite.__init__(self)
+self.image = BULLET_IMAGES
+self.rect = self.image.get_rect()
+self.rect.midbottom = initial_position
+self.speed = 10
+
+def move(self):
+self.rect.top -= self.speed
+
+class Opponent(pygame.sprite.Sprite):
+def __init__(self, AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, initial_position):
+pygame.sprite.Sprite.__init__(self)
+self.image = []
+for i in range(len(AIRCRAFT_PLAYER)):
+self.image.append(AIRCRAFT_IMAGES.subsurface(AIRCRAFT_PLAYER[i]).convert_alpha())
+self.rect = AIRCRAFT_PLAYER[0]
+self.rect.topleft = initial_position
+self.speed = 8
+self.bullets = pygame.sprite.Group()
+self.img_index = 0
+self.is_hit = False
+
+def shoot(self, BULLET_IMAGES):
+bullet = Bullet(BULLET_IMAGES, self.rect.midtop)
+self.bullets.add(bullet)
+
+def moveUp(self):
+if self.rect.top &lt;= 0:
+self.rect.top = 0
+else:
+self.rect.top -= self.speed
+
+def moveDown(self):
+if self.rect.top &gt;= SCREEN_HEIGHT - self.rect.height:
+self.rect.top = SCREEN_HEIGHT - self.rect.height
+else:
+self.rect.top += self.speed
+
+def moveLeft(self):
+if self.rect.left &lt;= 0:
+self.rect.left = 0
+else:
+self.rect.left -= self.speed
+
+def moveRight(self):
+if self.rect.left &gt;= SCREEN_WIDTH - self.rect.width:
+self.rect.left = SCREEN_WIDTH - self.rect.width
+else:
+self.rect.left += self.speed
+
+class Challenger(pygame.sprite.Sprite):
+def __init__(self, opponent_resource, opponent_down_resources, init_pos):
+pygame.sprite.Sprite.__init__(self)
+self.image = opponent_resource
+self.rect = self.image.get_rect()
+self.rect.topleft = init_pos
+self.down_imgs = opponent_down_resources
+self.speed = 2
+self.down_index = 0
+
+def move(self):
+self.rect.top += self.speed
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+class Bullet(pygame.sprite.Sprite):
+def __init__(self, BULLET_IMAGES, initial_position):
+pygame.sprite.Sprite.__init__(self)
+self.image = BULLET_IMAGES
+self.rect = self.image.get_rect()
+self.rect.midbottom = initial_position
+self.speed = 10
+ 
+def move(self):
+self.rect.top -= self.speed
+ 
+class Opponent(pygame.sprite.Sprite):
+def __init__(self, AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, initial_position):
+pygame.sprite.Sprite.__init__(self)
+self.image = []
+for i in range(len(AIRCRAFT_PLAYER)):
+self.image.append(AIRCRAFT_IMAGES.subsurface(AIRCRAFT_PLAYER[i]).convert_alpha())
+self.rect = AIRCRAFT_PLAYER[0]
+self.rect.topleft = initial_position
+self.speed = 8
+self.bullets = pygame.sprite.Group()
+self.img_index = 0
+self.is_hit = False
+ 
+def shoot(self, BULLET_IMAGES):
+bullet = Bullet(BULLET_IMAGES, self.rect.midtop)
+self.bullets.add(bullet)
+ 
+def moveUp(self):
+if self.rect.top &lt;= 0:
+self.rect.top = 0
+else:
+self.rect.top -= self.speed
+ 
+def moveDown(self):
+if self.rect.top &gt;= SCREEN_HEIGHT - self.rect.height:
+self.rect.top = SCREEN_HEIGHT - self.rect.height
+else:
+self.rect.top += self.speed
+ 
+def moveLeft(self):
+if self.rect.left &lt;= 0:
+self.rect.left = 0
+else:
+self.rect.left -= self.speed
+ 
+def moveRight(self):
+if self.rect.left &gt;= SCREEN_WIDTH - self.rect.width:
+self.rect.left = SCREEN_WIDTH - self.rect.width
+else:
+self.rect.left += self.speed
+ 
+class Challenger(pygame.sprite.Sprite):
+def __init__(self, opponent_resource, opponent_down_resources, init_pos):
+pygame.sprite.Sprite.__init__(self)
+self.image = opponent_resource
+self.rect = self.image.get_rect()
+self.rect.topleft = init_pos
+self.down_imgs = opponent_down_resources
+self.speed = 2
+self.down_index = 0
+ 
+def move(self):
+self.rect.top += self.speed
+In the code above, which is for the class use in the game play of a system.(Aircraft War Game in Python)
+
+Complete Source Code of Aircraft War Game in Python
+AircraftGame.py
+from sys import exit
+from pygame.locals import *
+from StrategyGame import *
+import random
+
+# Initialize the game
+pygame.init()
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption('Aircraft War Game')
+
+# Loading game music
+BULLETSHOT_SOUNDTEST = pygame.mixer.Sound('image/sound/bullet.wav')
+OPPONENT1_DOWN_SOUNDTEST = pygame.mixer.Sound('image/sound/opponent1_down.wav')
+GAMEOVER_SOUNDTEST = pygame.mixer.Sound('image/sound/game_over.wav')
+BULLETSHOT_SOUNDTEST.set_volume(0.3)
+OPPONENT1_DOWN_SOUNDTEST.set_volume(0.3)
+GAMEOVER_SOUNDTEST.set_volume(0.3)
+pygame.mixer.music.load('image/sound/game_music.wav')
+pygame.mixer.music.play(-1, 0.0)
+pygame.mixer.music.set_volume(0.25)
+
+# loading background image
+GAME_BACKGROUND = pygame.image.load('image/image/background.png').convert()
+GAME_OVER = pygame.image.load('image/image/gameover.png')
+filename = 'image/image/aircraft_shooter.png'
+AIRCRAFT_IMAGES = pygame.image.load(filename)
+
+# Set player related parameters
+AIRCRAFT_PLAYER = []
+AIRCRAFT_PLAYER.append(pygame.Rect(0, 99, 102, 126)) # Player sprite image area
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 360, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 234, 102, 126)) # Player explosion sprite image area
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 624, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 498, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(432, 624, 102, 126))
+AIRCRAFT_PLAYER_POSITION = [200, 600]
+OPPONENT = Opponent(AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, AIRCRAFT_PLAYER_POSITION)
+
+# Define the surface related parameters used by the bullet object
+AIRCRAFT_BULLET = pygame.Rect(1004, 987, 9, 21)
+BULLET_IMAGES = AIRCRAFT_IMAGES.subsurface(AIRCRAFT_BULLET)
+
+# Define the surface related parameters used by the opponent object
+OPPONENT1 = pygame.Rect(534, 612, 57, 43)
+OPPONENT1_IMAGES = AIRCRAFT_IMAGES.subsurface(OPPONENT1)
+OPPONENT1_DOWN_IMAGES = []
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 347, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(873, 697, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 296, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(930, 697, 57, 43)))
+
+CHALLENGER1 = pygame.sprite.Group()
+
+# Store the destroyed aircraft for rendering the wrecking sprite animation
+CHALLENGER_DOWN = pygame.sprite.Group()
+
+SHOOT_DISTANCE = 0
+CHALLENGER_DISTANCE = 0
+
+OPPONENT_DOWN_INDEX = 16
+
+SCORE = 0
+
+CLOCK = pygame.time.Clock()
+
+RUNNING = True
+
+while RUNNING:
+# Control the maximum frame rate of the game is 60
+CLOCK.tick(60)
+
+# Control the firing of the bullet frequency and fire the bullet
+if not OPPONENT.is_hit:
+if SHOOT_DISTANCE % 15 == 0:
+BULLETSHOT_SOUNDTEST.play()
+OPPONENT.shoot(BULLET_IMAGES)
+SHOOT_DISTANCE += 1
+if SHOOT_DISTANCE &gt;= 15:
+SHOOT_DISTANCE = 0
+
+# Generating opponent aircraft
+if SHOOT_DISTANCE % 50 == 0:
+CHALLENGER1_POSITION = [random.randint(0, SCREEN_WIDTH - OPPONENT1.width), 0]
+CHALLENGERS1 = Challenger(OPPONENT1_IMAGES, OPPONENT1_DOWN_IMAGES, CHALLENGER1_POSITION)
+CHALLENGER1.add(CHALLENGERS1)
+CHALLENGER_DISTANCE += 1
+if CHALLENGER_DISTANCE &gt;= 100:
+CHALLENGER_DISTANCE = 0
+
+# Move the bullet and delete if it is exceeds the window
+for bullet in OPPONENT.bullets:
+bullet.move()
+if bullet.rect.bottom &lt; 0:
+OPPONENT.bullets.remove(bullet)
+
+# Move opponent aircraft, delete if it is exceeds the window range
+for CHALLENGER in CHALLENGER1:
+CHALLENGER.move()
+# Determine if the player is hit
+if pygame.sprite.collide_circle(CHALLENGER, OPPONENT):
+CHALLENGER_DOWN.add(CHALLENGER)
+CHALLENGER1.remove(CHALLENGER)
+OPPONENT.is_hit = True
+GAMEOVER_SOUNDTEST.play()
+break
+if CHALLENGER.rect.top &gt; SCREEN_HEIGHT:
+CHALLENGER1.remove(CHALLENGER)
+
+# Add the opponent object that was hit to the destroyed opponent group to render the destroy animation
+CHALLENGER1_DOWN = pygame.sprite.groupcollide(CHALLENGER1, OPPONENT.bullets, 1, 1)
+for CHALLENGERS_DOWN in CHALLENGER1_DOWN:
+CHALLENGER_DOWN.add(CHALLENGERS_DOWN)
+
+# Drawing background
+screen.fill(0)
+screen.blit(GAME_BACKGROUND, (0, 0))
+
+# Drawing player plane
+if not OPPONENT.is_hit:
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+# Change the image index to make the aircraft animated
+OPPONENT.img_index = SHOOT_DISTANCE // 8
+else:
+OPPONENT.img_index = OPPONENT_DOWN_INDEX // 8
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+OPPONENT_DOWN_INDEX += 1
+if OPPONENT_DOWN_INDEX &gt; 47:
+RUNNING = False
+
+# Draw an wreck animation
+for CHALLENGERS_DOWN in CHALLENGER_DOWN:
+if CHALLENGERS_DOWN.down_index == 0:
+OPPONENT1_DOWN_SOUNDTEST.play()
+if CHALLENGERS_DOWN.down_index &gt; 7:
+CHALLENGER_DOWN.remove(CHALLENGERS_DOWN)
+SCORE += 1000
+continue
+screen.blit(CHALLENGERS_DOWN.down_imgs[CHALLENGERS_DOWN.down_index // 2], CHALLENGERS_DOWN.rect)
+CHALLENGERS_DOWN.down_index += 1
+
+# Drawing bullets and opponents planes
+OPPONENT.bullets.draw(screen)
+CHALLENGER1.draw(screen)
+
+# Draw a score
+SCORE_FONT = pygame.font.Font(None, 36)
+SCORE_TXT = SCORE_FONT.render(str(SCORE), True, (255, 255, 0))
+TXT_AIRCRAFT = SCORE_TXT.get_rect()
+TXT_AIRCRAFT.topleft = [10, 10]
+screen.blit(SCORE_TXT, TXT_AIRCRAFT)
+
+# Update screen
+pygame.display.update()
+
+for event in pygame.event.get():
+if event.type == pygame.QUIT:
+pygame.quit()
+exit()
+
+# Listening for keyboard events
+KEY_PRESSED_ENTER = pygame.key.get_pressed()
+# Invalid if the player is hit
+if not OPPONENT.is_hit:
+if KEY_PRESSED_ENTER[K_r] or KEY_PRESSED_ENTER[K_UP]:
+OPPONENT.moveUp()
+if KEY_PRESSED_ENTER[K_f] or KEY_PRESSED_ENTER[K_DOWN]:
+OPPONENT.moveDown()
+if KEY_PRESSED_ENTER[K_d] or KEY_PRESSED_ENTER[K_LEFT]:
+OPPONENT.moveLeft()
+if KEY_PRESSED_ENTER[K_g] or KEY_PRESSED_ENTER[K_RIGHT]:
+OPPONENT.moveRight()
+
+# Brought To You By Itsourcecode.com
+
+FONT = pygame.font.Font(None, 60)
+TXT = FONT.render('Score: ' + str(SCORE), True, (255, 255, 0))
+TXT_AIRCRAFT = TXT.get_rect()
+TXT_AIRCRAFT.centerx = screen.get_rect().centerx
+TXT_AIRCRAFT.centery = screen.get_rect().centery + 24
+screen.blit(GAME_OVER, (0, 0))
+screen.blit(TXT, TXT_AIRCRAFT)
+
+while 1:
+for event in pygame.event.get():
+if event.type == pygame.QUIT:
+pygame.quit()
+exit()
+pygame.display.update()
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+from sys import exit
+from pygame.locals import *
+from StrategyGame import *
+import random
+ 
+# Initialize the game
+pygame.init()
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption('Aircraft War Game')
+ 
+# Loading game music
+BULLETSHOT_SOUNDTEST = pygame.mixer.Sound('image/sound/bullet.wav')
+OPPONENT1_DOWN_SOUNDTEST = pygame.mixer.Sound('image/sound/opponent1_down.wav')
+GAMEOVER_SOUNDTEST = pygame.mixer.Sound('image/sound/game_over.wav')
+BULLETSHOT_SOUNDTEST.set_volume(0.3)
+OPPONENT1_DOWN_SOUNDTEST.set_volume(0.3)
+GAMEOVER_SOUNDTEST.set_volume(0.3)
+pygame.mixer.music.load('image/sound/game_music.wav')
+pygame.mixer.music.play(-1, 0.0)
+pygame.mixer.music.set_volume(0.25)
+ 
+# loading background image
+GAME_BACKGROUND = pygame.image.load('image/image/background.png').convert()
+GAME_OVER = pygame.image.load('image/image/gameover.png')
+filename = 'image/image/aircraft_shooter.png'
+AIRCRAFT_IMAGES = pygame.image.load(filename)
+ 
+# Set player related parameters
+AIRCRAFT_PLAYER = []
+AIRCRAFT_PLAYER.append(pygame.Rect(0, 99, 102, 126)) # Player sprite image area
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 360, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(165, 234, 102, 126)) # Player explosion sprite image area
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 624, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(330, 498, 102, 126))
+AIRCRAFT_PLAYER.append(pygame.Rect(432, 624, 102, 126))
+AIRCRAFT_PLAYER_POSITION = [200, 600]
+OPPONENT = Opponent(AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, AIRCRAFT_PLAYER_POSITION)
+ 
+# Define the surface related parameters used by the bullet object
+AIRCRAFT_BULLET = pygame.Rect(1004, 987, 9, 21)
+BULLET_IMAGES = AIRCRAFT_IMAGES.subsurface(AIRCRAFT_BULLET)
+ 
+# Define the surface related parameters used by the opponent object
+OPPONENT1 = pygame.Rect(534, 612, 57, 43)
+OPPONENT1_IMAGES = AIRCRAFT_IMAGES.subsurface(OPPONENT1)
+OPPONENT1_DOWN_IMAGES = []
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 347, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(873, 697, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(267, 296, 57, 43)))
+OPPONENT1_DOWN_IMAGES.append(AIRCRAFT_IMAGES.subsurface(pygame.Rect(930, 697, 57, 43)))
+ 
+CHALLENGER1 = pygame.sprite.Group()
+ 
+# Store the destroyed aircraft for rendering the wrecking sprite animation
+CHALLENGER_DOWN = pygame.sprite.Group()
+ 
+SHOOT_DISTANCE = 0
+CHALLENGER_DISTANCE = 0
+ 
+OPPONENT_DOWN_INDEX = 16
+ 
+SCORE = 0
+ 
+CLOCK = pygame.time.Clock()
+ 
+RUNNING = True
+ 
+while RUNNING:
+# Control the maximum frame rate of the game is 60
+CLOCK.tick(60)
+ 
+# Control the firing of the bullet frequency and fire the bullet
+if not OPPONENT.is_hit:
+if SHOOT_DISTANCE % 15 == 0:
+BULLETSHOT_SOUNDTEST.play()
+OPPONENT.shoot(BULLET_IMAGES)
+SHOOT_DISTANCE += 1
+if SHOOT_DISTANCE &gt;= 15:
+SHOOT_DISTANCE = 0
+ 
+# Generating opponent aircraft
+if SHOOT_DISTANCE % 50 == 0:
+CHALLENGER1_POSITION = [random.randint(0, SCREEN_WIDTH - OPPONENT1.width), 0]
+CHALLENGERS1 = Challenger(OPPONENT1_IMAGES, OPPONENT1_DOWN_IMAGES, CHALLENGER1_POSITION)
+CHALLENGER1.add(CHALLENGERS1)
+CHALLENGER_DISTANCE += 1
+if CHALLENGER_DISTANCE &gt;= 100:
+CHALLENGER_DISTANCE = 0
+ 
+# Move the bullet and delete if it is exceeds the window
+for bullet in OPPONENT.bullets:
+bullet.move()
+if bullet.rect.bottom &lt; 0:
+OPPONENT.bullets.remove(bullet)
+ 
+# Move opponent aircraft, delete if it is exceeds the window range
+for CHALLENGER in CHALLENGER1:
+CHALLENGER.move()
+# Determine if the player is hit
+if pygame.sprite.collide_circle(CHALLENGER, OPPONENT):
+CHALLENGER_DOWN.add(CHALLENGER)
+CHALLENGER1.remove(CHALLENGER)
+OPPONENT.is_hit = True
+GAMEOVER_SOUNDTEST.play()
+break
+if CHALLENGER.rect.top &gt; SCREEN_HEIGHT:
+CHALLENGER1.remove(CHALLENGER)
+ 
+# Add the opponent object that was hit to the destroyed opponent group to render the destroy animation
+CHALLENGER1_DOWN = pygame.sprite.groupcollide(CHALLENGER1, OPPONENT.bullets, 1, 1)
+for CHALLENGERS_DOWN in CHALLENGER1_DOWN:
+CHALLENGER_DOWN.add(CHALLENGERS_DOWN)
+ 
+# Drawing background
+screen.fill(0)
+screen.blit(GAME_BACKGROUND, (0, 0))
+ 
+# Drawing player plane
+if not OPPONENT.is_hit:
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+# Change the image index to make the aircraft animated
+OPPONENT.img_index = SHOOT_DISTANCE // 8
+else:
+OPPONENT.img_index = OPPONENT_DOWN_INDEX // 8
+screen.blit(OPPONENT.image[OPPONENT.img_index], OPPONENT.rect)
+OPPONENT_DOWN_INDEX += 1
+if OPPONENT_DOWN_INDEX &gt; 47:
+RUNNING = False
+ 
+# Draw an wreck animation
+for CHALLENGERS_DOWN in CHALLENGER_DOWN:
+if CHALLENGERS_DOWN.down_index == 0:
+OPPONENT1_DOWN_SOUNDTEST.play()
+if CHALLENGERS_DOWN.down_index &gt; 7:
+CHALLENGER_DOWN.remove(CHALLENGERS_DOWN)
+SCORE += 1000
+continue
+screen.blit(CHALLENGERS_DOWN.down_imgs[CHALLENGERS_DOWN.down_index // 2], CHALLENGERS_DOWN.rect)
+CHALLENGERS_DOWN.down_index += 1
+ 
+# Drawing bullets and opponents planes
+OPPONENT.bullets.draw(screen)
+CHALLENGER1.draw(screen)
+ 
+# Draw a score
+SCORE_FONT = pygame.font.Font(None, 36)
+SCORE_TXT = SCORE_FONT.render(str(SCORE), True, (255, 255, 0))
+TXT_AIRCRAFT = SCORE_TXT.get_rect()
+TXT_AIRCRAFT.topleft = [10, 10]
+screen.blit(SCORE_TXT, TXT_AIRCRAFT)
+ 
+# Update screen
+pygame.display.update()
+ 
+for event in pygame.event.get():
+if event.type == pygame.QUIT:
+pygame.quit()
+exit()
+ 
+# Listening for keyboard events
+KEY_PRESSED_ENTER = pygame.key.get_pressed()
+# Invalid if the player is hit
+if not OPPONENT.is_hit:
+if KEY_PRESSED_ENTER[K_r] or KEY_PRESSED_ENTER[K_UP]:
+OPPONENT.moveUp()
+if KEY_PRESSED_ENTER[K_f] or KEY_PRESSED_ENTER[K_DOWN]:
+OPPONENT.moveDown()
+if KEY_PRESSED_ENTER[K_d] or KEY_PRESSED_ENTER[K_LEFT]:
+OPPONENT.moveLeft()
+if KEY_PRESSED_ENTER[K_g] or KEY_PRESSED_ENTER[K_RIGHT]:
+OPPONENT.moveRight()
+ 
+# Brought To You By Itsourcecode.com
+ 
+FONT = pygame.font.Font(None, 60)
+TXT = FONT.render('Score: ' + str(SCORE), True, (255, 255, 0))
+TXT_AIRCRAFT = TXT.get_rect()
+TXT_AIRCRAFT.centerx = screen.get_rect().centerx
+TXT_AIRCRAFT.centery = screen.get_rect().centery + 24
+screen.blit(GAME_OVER, (0, 0))
+screen.blit(TXT, TXT_AIRCRAFT)
+ 
+while 1:
+for event in pygame.event.get():
+if event.type == pygame.QUIT:
+pygame.quit()
+exit()
+pygame.display.update()
+StrategyGame.py
+import pygame<br><br>SCREEN_WIDTH = 480<br>SCREEN_HEIGHT = 800<br><br>TYPE_SMALL = 1<br>TYPE_MIDDLE = 2<br>TYPE_BIG = 3<br><br>class Bullet(pygame.sprite.Sprite):<br>    def __init__(self, BULLET_IMAGES, initial_position):<br>        pygame.sprite.Sprite.__init__(self)<br>        self.image = BULLET_IMAGES<br>        self.rect = self.image.get_rect()<br>        self.rect.midbottom = initial_position<br>        self.speed = 10<br><br>    def move(self):<br>        self.rect.top -= self.speed<br><br>class Opponent(pygame.sprite.Sprite):<br>    def __init__(self, AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, initial_position):<br>        pygame.sprite.Sprite.__init__(self)<br>        self.image = []<br>        for i in range(len(AIRCRAFT_PLAYER)):<br>            self.image.append(AIRCRAFT_IMAGES.subsurface(AIRCRAFT_PLAYER[i]).convert_alpha())<br>        self.rect = AIRCRAFT_PLAYER[0]<br>        self.rect.topleft = initial_position<br>        self.speed = 8<br>        self.bullets = pygame.sprite.Group()<br>        self.img_index = 0<br>        self.is_hit = False<br><br>    def shoot(self, BULLET_IMAGES):<br>        bullet = Bullet(BULLET_IMAGES, self.rect.midtop)<br>        self.bullets.add(bullet)<br><br>    def moveUp(self):<br>        if self.rect.top &lt;= 0:<br>            self.rect.top = 0<br>        else:<br>            self.rect.top -= self.speed<br><br>    def moveDown(self):<br>        if self.rect.top &gt;= SCREEN_HEIGHT - self.rect.height:<br>            self.rect.top = SCREEN_HEIGHT - self.rect.height<br>        else:<br>            self.rect.top += self.speed<br><br>    def moveLeft(self):<br>        if self.rect.left &lt;= 0:<br>            self.rect.left = 0<br>        else:<br>            self.rect.left -= self.speed<br><br>    def moveRight(self):<br>        if self.rect.left &gt;= SCREEN_WIDTH - self.rect.width:<br>            self.rect.left = SCREEN_WIDTH - self.rect.width<br>        else:<br>            self.rect.left += self.speed<br><br>class Challenger(pygame.sprite.Sprite):<br>    def __init__(self, opponent_resource, opponent_down_resources, init_pos):<br>       pygame.sprite.Sprite.__init__(self)<br>       self.image = opponent_resource<br>       self.rect = self.image.get_rect()<br>       self.rect.topleft = init_pos<br>       self.down_imgs = opponent_down_resources<br>       self.speed = 2<br>       self.down_index = 0<br><br>    def move(self):<br>        self.rect.top += self.speed
+1
+import pygame<br><br>SCREEN_WIDTH = 480<br>SCREEN_HEIGHT = 800<br><br>TYPE_SMALL = 1<br>TYPE_MIDDLE = 2<br>TYPE_BIG = 3<br><br>class Bullet(pygame.sprite.Sprite):<br>    def __init__(self, BULLET_IMAGES, initial_position):<br>        pygame.sprite.Sprite.__init__(self)<br>        self.image = BULLET_IMAGES<br>        self.rect = self.image.get_rect()<br>        self.rect.midbottom = initial_position<br>        self.speed = 10<br><br>    def move(self):<br>        self.rect.top -= self.speed<br><br>class Opponent(pygame.sprite.Sprite):<br>    def __init__(self, AIRCRAFT_IMAGES, AIRCRAFT_PLAYER, initial_position):<br>        pygame.sprite.Sprite.__init__(self)<br>        self.image = []<br>        for i in range(len(AIRCRAFT_PLAYER)):<br>            self.image.append(AIRCRAFT_IMAGES.subsurface(AIRCRAFT_PLAYER[i]).convert_alpha())<br>        self.rect = AIRCRAFT_PLAYER[0]<br>        self.rect.topleft = initial_position<br>        self.speed = 8<br>        self.bullets = pygame.sprite.Group()<br>        self.img_index = 0<br>        self.is_hit = False<br><br>    def shoot(self, BULLET_IMAGES):<br>        bullet = Bullet(BULLET_IMAGES, self.rect.midtop)<br>        self.bullets.add(bullet)<br><br>    def moveUp(self):<br>        if self.rect.top &lt;= 0:<br>            self.rect.top = 0<br>        else:<br>            self.rect.top -= self.speed<br><br>    def moveDown(self):<br>        if self.rect.top &gt;= SCREEN_HEIGHT - self.rect.height:<br>            self.rect.top = SCREEN_HEIGHT - self.rect.height<br>        else:<br>            self.rect.top += self.speed<br><br>    def moveLeft(self):<br>        if self.rect.left &lt;= 0:<br>            self.rect.left = 0<br>        else:<br>            self.rect.left -= self.speed<br><br>    def moveRight(self):<br>        if self.rect.left &gt;= SCREEN_WIDTH - self.rect.width:<br>            self.rect.left = SCREEN_WIDTH - self.rect.width<br>        else:<br>            self.rect.left += self.speed<br><br>class Challenger(pygame.sprite.Sprite):<br>    def __init__(self, opponent_resource, opponent_down_resources, init_pos):<br>       pygame.sprite.Sprite.__init__(self)<br>       self.image = opponent_resource<br>       self.rect = self.image.get_rect()<br>       self.rect.topleft = init_pos<br>       self.down_imgs = opponent_down_resources<br>       self.speed = 2<br>       self.down_index = 0<br><br>    def move(self):<br>        self.rect.top += self.speed
+How To Run the Aircraft War Game in Python with Source Code?
+To run this project, you must have installed a Pycharm on your PC (for Windows). Aircraft War Game in Python with Source Code is  for educational purposes only!
+
+After downloading the project you must follow the steps below:
+
+Step 1: Unzip the file or Extract the file
+
+Step 2: Double click the AircraftGame
+
+Step 3: Project is ready to run
